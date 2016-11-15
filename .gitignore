@@ -6,4 +6,5 @@
 Homestead.json
 Homestead.yaml
 .env
-/data
+/database/seeds/data
+*.sw?

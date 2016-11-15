@@ -15,4 +15,15 @@ vim app/Console/Kernel.php
 mh@debian:~/htdocs/phonebook$ php artisan make:auth
 Authentication scaffolding generated successfully.
 
+vim 2014_10_12_000000_create_users_table.php
+php artisan make:migration create_departments_table
+php artisan make:migration create_users_x_departments_table
+php artisan make:model Department
+
+
+php artisan migrate:refresh [-v]
+
+Seeder erstellen:
+php artisan make:seeder UserTableSeeder
+
 
