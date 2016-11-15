@@ -1,0 +1,18 @@
+php artisan key:generate
+
+chmod -R 777 storage/ bootstrap/cache/
+
+vim .env
+
+composer update
+
+php artisan list
+
+php artisan make:command ReadExcel
+
+vim app/Console/Kernel.php
+
+mh@debian:~/htdocs/phonebook$ php artisan make:auth
+Authentication scaffolding generated successfully.
+
+
