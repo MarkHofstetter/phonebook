@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
-<table id="userstable" class="display" cellspacing="0" width="100%">
+<table id="userstable" class="display table table-striped table-bordered" cellspacing="0" width="100%">
 <thead>
   <tr>
     <th>Name</th>

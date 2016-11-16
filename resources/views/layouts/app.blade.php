@@ -11,14 +11,15 @@
     <title>{{ config('app.name', 'Phonebook') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ URL::asset('/css/app.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+<!--    <link rel="stylesheet" href="{{ URL::asset('/bower_components/datatables.net-dt/css/jquery.dataTables.min.css') }}"> -->
+    <link rel="stylesheet" href="{{ URL::asset('/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> 
 
     <!-- Scripts -->
     <script src="{{ URL::asset('/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script> 
-<!--     <script src="{{ URL::asset('/js/app.js') }}"></script> -->
+    <link rel="stylesheet" href="{{ URL::asset('/css/app.css') }}">
+<!--    <script src="{{ URL::asset('/js/app.js') }}"></script> -->
     <script>
         window.Phonebook = <?php echo json_encode([
             'csrfToken' => csrf_token(),
