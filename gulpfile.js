@@ -1,6 +1,8 @@
+require('es6-promise').polyfill();
+var Promise = require('es6-promise').Promise;
 const elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue-2');
+// require('laravel-elixir-vue-2');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,7 +15,9 @@ require('laravel-elixir-vue-2');
  |
  */
 
-elixir((mix) => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+elixir(function (mix) {
+    mix.sass('app.scss').version('public/css/app.css');
+//       .webpack('app.js');
+mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/','public/fonts/bootstrap');
 });
+

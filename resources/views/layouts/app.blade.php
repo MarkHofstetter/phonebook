@@ -8,14 +8,19 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Phonebook') }}</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::asset('/css/app.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 
     <!-- Scripts -->
+    <script src="{{ URL::asset('/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script> 
+<!--     <script src="{{ URL::asset('/js/app.js') }}"></script> -->
     <script>
-        window.Laravel = <?php echo json_encode([
+        window.Phonebook = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
@@ -36,7 +41,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Phonebook') }}
                     </a>
                 </div>
 
@@ -81,7 +86,5 @@
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="{{ URL::asset('/js/app.js') }}"></script>
 </body>
 </html>
