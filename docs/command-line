@@ -26,4 +26,13 @@ php artisan migrate:refresh [-v]
 Seeder erstellen:
 php artisan make:seeder UserTableSeeder
 
+npm install gulp
 
+npm install
+
+.bowerrc
+bower install --save datatables.net
+bower install --save datatables.net-bs
+ 
+authorization
+php artisan make:policy UserPolicy --model=User 

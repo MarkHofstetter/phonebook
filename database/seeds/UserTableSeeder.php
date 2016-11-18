@@ -34,5 +34,9 @@ class UserTableSeeder extends Seeder
             }
          }
        }
+       DB::table('users')
+           ->where('name', 'GOLLACKNER, Christine')
+           ->update(['isadmin' => true, ]);
+
      }
 }

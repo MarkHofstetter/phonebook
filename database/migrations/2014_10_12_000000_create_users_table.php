@@ -19,7 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
 	    $table->string('phone');
             $table->string('mobilephone')->nullable();
+            $table->string('phoneprefix')->nullable();
             $table->string('password');
+            $table->boolean('isadmin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

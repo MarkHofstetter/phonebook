@@ -9,6 +9,7 @@
 <thead>
   <tr>
     <th>Name</th>
+    <th>Prefix</th>
     <th>Phone</th>
     <th>email</th>
     <th>Mobile</th>
@@ -17,9 +18,14 @@
 <tbody>  
 @foreach ($users as $user)
  <tr>
-   <td>{{ $user->name }}</td>
+   @if (!Auth::guest() && Auth::user()->isadmin) 
+     <td><a href="{{ url('user/update', $user) }}">{{ $user->name }}</a></td>
+   @else
+     <td>{{ $user->name }}</td>
+   @endif
+   <td>{{ $user->phoneprefix }}</td>
    <td>{{ $user->phone }}</td>
-   <td>{{ $user->email }}</td>
+   <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</td>
    <td>{{ $user->mobilephone }}</td>
  </tr>
 @endforeach

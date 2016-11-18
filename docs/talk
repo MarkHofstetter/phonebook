@@ -2,10 +2,10 @@
 + user auth
 + migrations
 + command line 
-+ database setter
++ database setter 
 + templating - blade
-+ authorization
 + forms
++ authorization
 + testing
 + include js libs eg datatables
 + elxir, gulp, SASS

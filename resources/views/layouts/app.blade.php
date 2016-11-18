@@ -16,10 +16,9 @@
 
     <!-- Scripts -->
     <script src="{{ URL::asset('/bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ URL::asset('/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('/bower_components/datatables.net/js/jquery.dataTables.js') }}"></script>
     <script src="{{ URL::asset('/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script> 
     <link rel="stylesheet" href="{{ URL::asset('/css/app.css') }}">
-<!--    <script src="{{ URL::asset('/js/app.js') }}"></script> -->
     <script>
         window.Phonebook = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -59,25 +58,19 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
+                            <li><a href="{{ url('/user/update', Auth::user()) }}">{{ Auth::user()->name }}</a></li> 
+                          <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
+                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                             {{ csrf_field() }}
+                                         </form>
                                     </li>
-                                </ul>
-                            </li>
+
                         @endif
                     </ul>
                 </div>
