@@ -7,98 +7,67 @@ use App\User;
 
 class UserTest extends TestCase
 {
-    public $name = 'Test User';
-    public $file = 'bla.pdf';
+   public $name = 'Test User';
+   public $phone = '1234567';
+   public $prefix = '1111';
+   public $prefix2 = '2222';
+   public $email = 'schnupsi@stupsi.at';
+   public $password = 'blabla';
 
    public function testCreateUser() {
-        $this->visit('/register')
-             ->see('Confirm Password');
+        DB::table('users')->where('name', $this->name)->delete();
+        User::create([
+          'phone'        => $this->phone,
+          'name'         => $this->name,
+          'email'        => $this->email,
+          'password'     => Hash::make($this->password),
+        ]);
 
-        $this->type($this->name, 'name')
-               ->type('test@user.com', 'email')
-               ->type('blabla', 'password')
-               ->type('blabla', "password_confirmation")
-               ->select("employer", 'type')
-               ->press('Register');
+        $this->seeInDatabase('users', ['name' => $this->name,]);
 
-        $this->seeInDatabase('users', ['name' => $this->name, 'type'=>'employer' ]);
-
-        $this->visit('/home')
-             // ->see('Embed Link To Your Video');
-             ->see('consider');
+        $this->visit('/')
+             ->see($this->name);
+        print "\nuser created\n";
    }
 
     public function testUpdateUser() {
         $this->visit('/login')
-          ->type('homer@simpsons.com', 'email')
-          ->type('blabla', 'password')
+          ->type($this->email, 'email')
+          ->type($this->password, 'password')
           ->press('Login')
-          ->seePageIs('/')
-          ->see('Profile');
+          ->see($this->name)
+          ->seePageIs('/');
 			
-        $this->visit('/home')
-          ->see('Homer')
+        $this->click($this->name)
           ->see('Your Profile');
  
-        $this->type('Homer Change','name')
-          ->type('Honk','jobtitle')
-        ##   ->attach('/home/mh/htdocs/job-candidate/tests/'.$this->file, 'bla.pdf')
+        $this->type($this->prefix,'phoneprefix')
           ->press('Update')
-          ->seePageIs('/home');
+          ->seePageIs('/');
         
-        $this->seeInDatabase('users', ['name' => 'Homer Change', 'jobtitle'=>'Honk']);
-        $this->seeInDatabase('countries', ['name' => 'Austria']);
-          
-        
-	}
-	// public function test() // zum Testen der z.B. Currency ob nur 3 erlaubt 
+        $this->seeInDatabase('users', ['name' => $this->name, 'phoneprefix' => $this->prefix]);
+    }
 
-   public function testAjaxSearch() {
-        $this->visit('/ajaxsearch?usertype=employer')
-             ->see('Burns')
-             ->see('Bob')
-             ->dontSee('Homer')
-             ->dontSee('Marge');
+    public function testAdminUser() {
+        $admin =  User::where('email', 'christine.gollackner@nic.at')->first(); 
+        print "name ". $admin->name ."\n";        
 
-        $this->visit('/ajaxsearch?searchtext=Hom&usertype=jobseeker')
-             ->see('Homer')
-            // ->see('Marge')
-             ->dontSee('Burns');
+        $this->actingAs($admin)
+//           ->withSession(['foo' => 'bar'])
+           ->visit('/');
+
+        $this->click($this->name)
+          ->see('Your Profile');
+
+        $this->type($this->prefix2 ,'phoneprefix')
+          ->press('Update')
+          ->seePageIs('/');
+
+        $this->seeInDatabase('users', ['name' => $this->name, 'phoneprefix' => $this->prefix2]);
+    }
 
 
-        $this->visit('/ajaxsearch?searchtext=Bob&usertype=employer')
-             ->dontSee('Homer')
-             ->dontSee('Marge')
-             ->dontSee('Burns');
-  
-
-        $ger =  DB::table('countries')->where('name', 'Germany')->first();
-        $it =  DB::table('sectors')->where('name', 'Engineering / Technics / IT')->first();
-        $url = '/ajaxsearch?usertype=jobseeker&sector_id='.$it->id.'&country_id='.$ger->id;
-        # echo $url;
-        $this->visit($url)
-             ->see('Homer')
-             ->dontSee('Marge')
-             ->dontSee('Burns');
-
-        $this->visit('/ajaxsearch?searchtext=&usertype=employer')
-             ->dontSee('Homer')
-             ->dontSee('Marge')
-             ->see('Burns')
-             ->dontSee($this->name); # user has no video hence is not found
-        }
-
-  public function testUserDetail() {
-        $user =  DB::table('users')->where('name', $this->name)->first();
-        $this->visit('profile/'.$user->id)
-             ->see($this->name);
-
-  }
-   
-  public static function tearDownAfterClass() {
-  #   $country = User::where('name', 'Test User')->delete();
-  }
-
+    
    
   
 }

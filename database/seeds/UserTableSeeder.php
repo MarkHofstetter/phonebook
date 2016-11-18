@@ -22,6 +22,7 @@ class UserTableSeeder extends Seeder
                   echo $data[0] ."\n";
                   User::create([
                     'name'         => utf8_encode( $data[0] ),
+                    'phoneprefix'  => '+43 662 4669',
                     'phone'        => $data[2],
                     'email'        => utf8_encode( $data[3] ),
                     'mobilephone'  => $data[4],
@@ -38,5 +39,8 @@ class UserTableSeeder extends Seeder
            ->where('name', 'GOLLACKNER, Christine')
            ->update(['isadmin' => true, ]);
 
+       DB::table('users')
+           ->where('email', 'like', '%univie.ac.at')
+           ->update(['phoneprefix' => '+43 1 4277' ]);
      }
 }
