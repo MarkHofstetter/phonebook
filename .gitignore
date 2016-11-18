@@ -8,3 +8,4 @@ Homestead.yaml
 .env
 /database/seeds/data
 *.sw?
+/database/seeds/UserTableSeeder.php
