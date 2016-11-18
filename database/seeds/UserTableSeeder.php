@@ -36,6 +36,12 @@ class UserTableSeeder extends Seeder
          }
        }
        DB::table('users')
+           ->where('name', 'Name')->delete();
+       DB::table('users')
+           ->whereNull('email')->delete();
+             
+
+       DB::table('users')
            ->where('name', 'GOLLACKNER, Christine')
            ->update(['isadmin' => true, ]);
 
