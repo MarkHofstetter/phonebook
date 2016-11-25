@@ -51,5 +51,12 @@ class UserController extends Controller
              return redirect('/');
         }
 
+ 
+        public function jsonget(Request $request, User $user)
+        {   
+            return response()
+                ->json($user);
+
+        } 
 
 }

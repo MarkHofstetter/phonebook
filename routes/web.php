@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/', 'UserController@index');
 Route::get('/user/update/{user}', 'UserController@update');
 Route::post('/user/store/{user?}', 'UserController@store');
+

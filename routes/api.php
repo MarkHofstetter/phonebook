@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/user/{user}', 'UserController@jsonget');
+
+
+Route::get('users', function () {
+    return App\User::all();
+});
+
+/*
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+*/
